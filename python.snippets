@@ -1,0 +1,16 @@
+snippet restview "use to generate django rest framework view"
+class $1List(ListCreateAPIView):
+	queryset = $1.objects.all()
+	serializer_class = $1Serializer
+
+class $1Detail(RetrieveUpdateDestroyAPIView):
+	queryset = $1.objects.all()
+	serializer_class = $1Serializer
+
+endsnippet
+
+
+snippet resturl "use to generate django rest framework urls"
+url(r'^${1/^\w+/\L$0\E/g}/$', $1List.as_view(), name='${1/^\w+/\L$0\E/g}-list'),
+url(r'^${1/^\w+/\L$0\E/g}/(?P<pk>[0-9]+)/$', $1Detail.as_view(), name='${1/^\w+/\L$0\E/g}-detail'),
+endsnippet
